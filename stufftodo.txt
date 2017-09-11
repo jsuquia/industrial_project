@@ -54,6 +54,7 @@ Outlet (i.e library, mono etc)
 
 Transaction
 	TransactionID
+	TypeOfTransaction
 	DateAndTime
 	Amount
 	Discount
