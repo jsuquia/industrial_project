@@ -1,0 +1,20 @@
+<?php
+
+function ConnectToDatabase()
+{
+	$dbconnection = mysql_connect("silva.computing.dundee.ac.uk", "password","db"); //Do fix the password/server/username etc please before you try to use this
+	mysql_select_db("db"); //And this one
+	if(!$dbconnection)
+	{
+		echo "Cannot connect to database, either there is a problem with authentication or the server is down.";
+	}
+	return $dbconnection;
+}
+
+function CloseDatabaseConnection($dbconnection)
+{
+	mysql_close($dbconnection);
+}
+
+
+?>
