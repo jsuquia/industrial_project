@@ -1,0 +1,64 @@
+Product backlog
+Sprint backglog
+Prototype interface with colours
+Plan unit testing?
+Plan implement MVC?
+
+Design DB
+Implement DB
+Parse data into DB
+Expanable system to prase additional data (so just the same script)
+
+Template php page for others to be built from
+Login system
+index
+sleek interface
+Easy to use by dumb dumbs
+Easy to select calendar system which will generate the targeted dates stats
+Explanable, so allow to select retailer (if you have priviledge, if you don't just show the current persons retailer)
+
+Products nobody buys
+Products everyone buys
+Highest selling outlets
+Lowest selling outlets
+Users who buy the most
+Sailes projection from previous years data + trends
+Most profitable days
+Types of buyers (hard to do with no item data, group by people who buy later at night (presumed alcohol), amount of money, where they purchase from)
+Suggestions on what outlets to shut down?
+
+
+Tills?
+
+DB Design
+
+Retailer (for expandability)
+	Retailer_ID (PK, int)
+	Total_Disbersed (int, currency)
+
+Customer (use on the spreadsheet)
+	User_ID (PK, int)
+
+Outlet (i.e library, mono etc)
+	OutletID (PK, int)
+	OutletName (string)
+	Year (do we do 3 of these instead so its neater?)
+	Total sales
+	Cash transacted
+	Cash discounts
+	Value of offer redepmetions
+	# of offer redemptions
+	Enhanced Txns (?????????????????????)
+	Paid out (same as total sales??)
+
+
+Transaction
+	TransactionID
+	DateAndTime
+	Amount
+	Discount
+	Total Amount
+	OutletID
+	User_ID
+	
+Website User DB? idk about google api log in thingy
