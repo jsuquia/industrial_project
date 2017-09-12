@@ -14,7 +14,7 @@
 	<p>Some stuff about analyzing Yoyo stats.</p> 
 	
 	<?php
-		include  'PHP_Scripts/DatabaseConnection.php';
+		include  'php_scripts/DatabaseConnection.php';
 		$db = ConnectToDatabase();
 		CloseDatabaseConnection($db);
 	?>
