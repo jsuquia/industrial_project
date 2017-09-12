@@ -2,8 +2,8 @@
 
 function ConnectToDatabase()
 {
-	$dbconnection = mysql_connect("silva.computing.dundee.ac.uk", "password","db"); //Do fix the password/server/username etc please before you try to use this
-	mysql_select_db("db"); //And this one
+	$dbconnection = mysql_connect("silva.computing.dundee.ac.uk", "ip17team5 ","9473.ip17t.3749");
+	mysql_select_db("ip17team5db"); 
 	if(!$dbconnection)
 	{
 		echo "Cannot connect to database, either there is a problem with authentication or the server is down.";
