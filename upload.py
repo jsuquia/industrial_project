@@ -1,3 +1,4 @@
+print('upload run')
 
 from xlrd import open_workbook
 wb = open_workbook('sample.xlsx')

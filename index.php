@@ -16,9 +16,8 @@
 	<?php
 		include  'php_scripts/DatabaseConnection.php';
 		$db = ConnectToDatabase();
-		CloseDatabaseConnection($db);
+		CloseDatabaseConnection($db);		
 	?>
-
     <br><br>
 
     <form action="upload.php" method="post" enctype="multipart/form-data">
