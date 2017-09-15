@@ -37,7 +37,7 @@
             <div class="icon-holder">
                 <div class="row align-items-center">
                     <div class="col-12 text-center">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="calendar.php">
                             <i class="fa fa-calendar-o fa-2x"></i>
                         </a>
                     </div>
