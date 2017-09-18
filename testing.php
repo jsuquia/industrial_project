@@ -9,6 +9,8 @@ ALSO UNFINISHED DO NOT USE YET >:(
 */
 function UploadToDatabase($spreadsheet)
 {
+	$start = microtime(true);
+
 	include 'php_scripts/PHPExcel/IOFactory.php';
 	include 'php_scripts/DatabaseConnection.php';
 
@@ -26,53 +28,54 @@ function UploadToDatabase($spreadsheet)
 	$amountOfRows = $sheetToUse->getHighestRow();
 	$amountOfColumns = $sheetToUse->getHighestColumn();
 
-	//TESTING REMOVE PLEASE
-	$getHighestRow = 10;
-	//
+	$amountOfRows = 1000;
 
-	for($row = 1; $row <= $getHighestRow; $row++)
+	//$db = ConnectToDatabase();
+	
+	for($row = 6; $row <= $amountOfRows; $row++)
 	{
 		$rowData = $sheetToUse->rangeToArray('A' . $row . ':' . $amountOfColumns . $row, NULL, TRUE, FALSE);
-		var_dump($rowData);
-		echo '<br>';
+
+		$addDate = str_replace('/', '-', $rowData[0][1]);
+		$addDate = date ("Y-m-d H:i:s", strtotime($addDate));
+
+		$retailerName = $rowData[0][4];
+		$retailerID = $rowData[0][2];
+		if(!CheckIfInDB("Retailer", "Retailer_Name", $retailerID, $db));
+		{
+			$query = "INSERT INTO Retailer (Retailer_ID, Retailer_Name) VALUES ('$retailerID', '$retailerName');";
+			$result = mysql_query($query);
+		}
+
+		$outletName = $rowData[0][5];
+		$outletID = $rowData[0][3];
+		if(!CheckIfInDB("Outlet", "Outlet_ID", $outletID, $db));
+		{
+			$query = "INSERT INTO Outlet (Outlet_ID, Outlet_Name, Retailer_ID) VALUES ('$outletID', '$outletName', '$retailerID');";
+			$result = mysql_query($query);
+		}
+
+		$customerID = $rowData[0][6];
+		if(!CheckIfInDB("Customers" "Customer_ID", $customerID, $db));
+		{
+			//Add into db
+			$query = "INSERT INTO Customers (Customer_ID) VALUES ('$customerID');";
+			$result = mysql_query($query);
+		}
+
+		$tType = $rowData[0][7];
+		$amount = $rowData[0][8];
+		$discount = $rowData[0][9];
+		$total = $rowData[0][10];
+		$query = "INSERT INTO Transactions (Type_Transaction, Date_and_time, Amount, Discount, Total_Amount, Customer_ID, Outlet_ID) VALUES ('$tType', '$addDate', '$amount', '$discount', '$total', '$customerID', '$outletID');";
+		$result = mysql_query($query);
 	}
+	//CloseDatabaseConnection($db);
 
-	/*
-	$db = ConnectToDatabase();
+	$end = microtime(true);
+	$creationtime = ($end - $start);
+	printf("Page created in %.6f seconds.", $creationtime);
 
-	//Can i function this shit somehow?
-
-	//Check is retailer is in, if not, create new retailer
-	$retailerName = 'test';
-	$columnName = 'test';
-	$value = 'test';
-	if(!CheckIfInDB($retailerName, $columnName, $value, $db));
-	{
-		//Add into db
-	}
-
-	//Check if outlet is in, if not, create noew retailer
-	$outletName = 'test';
-	$columnName = 'test';
-	$value = 'test';
-	if(!CheckIfInDB($outletName, $columnName, $value, $db));
-	{
-		//Add into db
-	}
-
-	//Check if user (customer) is in, if not, create new user.
-	$customerID = 'test';
-	$columnName = 'test';
-	$value = 'test';
-	if(!CheckIfInDB($customerID, $columnName, $value, $db));
-	{
-		//Add into db
-	}
-
-
-
-	CloseDatabaseConnection($db);
-	*/
 }
 
 /*
