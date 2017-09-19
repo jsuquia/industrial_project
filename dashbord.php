@@ -5,6 +5,7 @@
  * Date: 15/09/2017
  * Time: 11:52
  */
+require('php_scripts/check_cookie.php');
 
 ?>
 
@@ -37,20 +38,20 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-4">
+            <div class="col-12 col-lg-4">
                 <div class="sub-header">
                     <h4 class="d-inline">LAST WEEK &nbsp;</h4><?php $previous_week = date("d/m/Y", strtotime("last week monday"));?> <p class="d-inline"><?=$previous_week?></p>
                     <canvas id="myChart" width="200" height="200"></canvas>
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-lg-4">
                 <div class="sub-header">
                     <h4 class="d-inline">2 WEEKS AGO &nbsp;</h4><?php $previous_week = date("d/m/Y", strtotime("-3 week monday"));?> <p class="d-inline"><?=$previous_week?></p>
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-lg-4">
                 <div class="sub-header">
                     <h4 class="d-inline">3 WEEKS AGO &nbsp;</h4><?php $previous_week = date("d/m/Y", strtotime("-4 week monday"));?> <p class="d-inline"><?=$previous_week?></p>
                 </div>
@@ -69,35 +70,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
 
     <script>
-
-        Chart.defaults.global.tooltipFontSize = 25;
-
         var ctx = document.getElementById("myChart");
-
-//        data = {
-//
-//                datasets: [{
-//                label: '# of Votes',
-//                data: [12, 19, 3, 5, 2, 3],
-//                backgroundColor: [
-//                    'rgba(255, 99, 132, 0.6)',
-//                    'rgba(54, 162, 235, 0.6)',
-//                    'rgba(255, 206, 86, 0.6)',
-//                    'rgba(75, 192, 192, 0.6)',
-//                    'rgba(153, 102, 255, 0.6)',
-//                    'rgba(255, 159, 64, 0.6)'
-//                ],
-//                borderColor: [
-//                    'rgba(255,99,132,1)',
-//                    'rgba(54, 162, 235, 1)',
-//                    'rgba(255, 206, 86, 1)',
-//                    'rgba(75, 192, 192, 1)',
-//                    'rgba(153, 102, 255, 1)',
-//                    'rgba(255, 159, 64, 1)'
-//                ],
-//                borderWidth: 1
-//
-//        };
 
         data = {
             datasets: [{
@@ -124,13 +97,14 @@
 
             // These labels appear in the legend and in the tooltips when hovering different arcs
             labels: [
-                'Red',
-                'Blue',
-                'Yellow',
-                'Green',
-                'Purple',
-                'Orange'
-            ],
+                'Mono',
+                'Liar',
+                'Library',
+                'Premier',
+                'Ninewells',
+                'Floor 5'
+            ]
+
         };
 
         var myDoughnutChart = new Chart(ctx, {

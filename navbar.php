@@ -17,7 +17,7 @@
             <div class="icon-holder">
                 <div class="row align-items-center">
                     <div class="col-12 text-center">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="dashbord.php">
                             <i class="fa fa-home fa-2x"></i>
                         </a>
                     </div>
@@ -67,7 +67,7 @@
             <div class="logout">
                 <div class="row align-items-center">
                     <div class="col-12 text-center">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="logout.php">
                             LOG OUT
                         </a>
                     </div>

@@ -1,71 +1,78 @@
 <?php
-	if(isset($_SESSION["privilege"]))
-	{
-		header("Location: index.php");
-		exit;
-	}
+/**
+ * Created by IntelliJ IDEA.
+ * User: Javier
+ * Date: 15/09/2017
+ * Time: 11:52
+ */
+if(isset($_COOKIE["user_session"]))
+{
+    $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . '/2017-projects/team5/industrial_project/dashbord.php';
+    header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+}
 
-	if(isset($_POST["submit"]))
-	{
-		include 'php_scripts/DatabaseConnection.php';
-		include 'php_scripts/DatabaseHandling.php';
-
-		$db = ConnectToDatabase();
-		$error = 0;
-		$username = Sanitise($_POST["username"]);
-		$password = Sanitise($_POST["password"]); //HASH THIS HERE PLEASE
-
-		$query = "SELECT * FROM USERS WHERE username = '$username';";
-		$result = mysql_query($query);
-		if (mysql_num_rows($result)==0)
-		{
-			$error++;
-		}
-
-		while($row = mysql_fetch_array($result))
-		{
-			if($row["password"] === $password)
-			{
-				if(session_id() === '')
-				{
-					session_start();
-				}
-
-				$_SESSION["username"] = $username;
-				$_SESSION["privilege"] = $row["privilege"];
-			}
-		}
-
-
-		if($error != 0)
-		{
-			//error has happened.
-		}
-		else if($error === 0)
-		{
-			header("Location: dashbord.php");
-			exit;
-		}	
-	}
 ?>
+
 <!DOCTYPE html>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-<html>
-<title>Log In : YoYo Analysis</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
 <body>
 
-<?php include 'forms/loginForm.php'; ?>
+<div class="container-fluid">
+    <div class="row align-items-center">
+        <div class="col-6 hidden-sm-down" id="left">
+            <img src="img/login.png" class="img-fluid mx-auto d-block" alt="Responsive image">
+        </div>
+
+        <div class="col-12 col-md-6" id="right">
+
+            <div class="row justify-content-center">
+                <div class="col-6 content">
+                    <h1 class="display-5 d-inline bold">SIGN IN</h1>
+                    <br><br><br><br>
+                    <form action="models/login_model.php" method ="post">
+                        <div class="form-group">
+                            <h5>USERNAME</h5>
+                            <input type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="donald_trump" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <h5>PASSWORD</h5>
+                            <input type="password" name="password" class="form-control" id="password" placeholder="*************" required>
+                        </div>
+
+                        <br>
+                        <button type="submit" name="submit" class="btn btn-primary"><b>SIGN IN</b></button>
+
+                    </form>
+
+                </div>
+            </div>
 
 
+        </div>
+    </div>
+
+</div>
+
+
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 </body>
-
 </html>
+
+
